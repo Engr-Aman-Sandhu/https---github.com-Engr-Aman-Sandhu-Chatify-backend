@@ -15,6 +15,8 @@ import cookieSession from 'cookie-session';
 import HTTP_STATUS from 'http-status-codes';
 import 'express-async-errors';
 
+const SERVER_PORT = 5000;
+
 export class ChatifyServer {
   private app: Application;
 
@@ -29,7 +31,6 @@ export class ChatifyServer {
     this.globalErrorHandler(this.app);
     this.startServer(this.app);
   }
-
   private securityMiddleware(app: Application): void {
     app.use(
       cookieSession({
@@ -61,9 +62,20 @@ export class ChatifyServer {
 
   private globalErrorHandler(app: Application): void {}
 
-  private startServer(app: Application): void {}
+  private async startServer(app: Application): Promise<void> {
+    try {
+      const httpServer: http.Server = new http.Server(app);
+      this.startHttpServer(httpServer);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   private createSocketIO(httpServer: http.Server): void {}
 
-  private startHttpServer(httpServer: http.Server): void {}
+  private startHttpServer(httpServer: http.Server): void {
+    httpServer.listen(SERVER_PORT, () => {
+      console.log(`Server is running on port ${SERVER_PORT}`);
+    });
+  }
 }
