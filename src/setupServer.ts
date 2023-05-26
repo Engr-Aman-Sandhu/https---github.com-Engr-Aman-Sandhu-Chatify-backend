@@ -19,8 +19,14 @@ import { createAdapter } from '@socket.io/redis-adapter';
 import 'express-async-errors';
 import { config } from './config';
 import applicationRoutes from './routes';
+import {
+  IErrorResponse,
+  CustomError,
+} from './shared/globals/helpers/error.handler';
+import Logger from 'bunyan';
 
 const SERVER_PORT = 5000;
+const log: Logger = config.createLogger('server');
 
 export class ChatifyServer {
   private app: Application;
@@ -67,7 +73,28 @@ export class ChatifyServer {
     applicationRoutes(app);
   }
 
-  private globalErrorHandler(app: Application): void {}
+  private globalErrorHandler(app: Application): void {
+    app.all('*', (req: Request, res: Response) => {
+      res
+        .status(HTTP_STATUS.NOT_FOUND)
+        .json({ message: `${req.originalUrl} not found` });
+    });
+
+    app.use(
+      (
+        error: IErrorResponse,
+        _req: Request,
+        res: Response,
+        next: NextFunction
+      ) => {
+        log.error(error);
+        if (error instanceof CustomError) {
+          return res.status(error.statusCode).json(error.serializeErrors());
+        }
+        next();
+      }
+    );
+  }
 
   private async startServer(app: Application): Promise<void> {
     try {
@@ -76,7 +103,7 @@ export class ChatifyServer {
       this.startHttpServer(httpServer);
       this.socketIOConnections(socketIO);
     } catch (err) {
-      console.error(err);
+      log.error(err);
     }
   }
 
@@ -95,9 +122,9 @@ export class ChatifyServer {
   }
 
   private startHttpServer(httpServer: http.Server): void {
-    console.log(`Server has started with process ${process.pid}`);
+    log.info(`Server has started with process ${process.pid}`);
     httpServer.listen(SERVER_PORT, () => {
-      console.log(`Server is running on port ${SERVER_PORT}`);
+      log.info(`Server is running on port ${SERVER_PORT}`);
     });
   }
   private socketIOConnections(io: Server): void {}
