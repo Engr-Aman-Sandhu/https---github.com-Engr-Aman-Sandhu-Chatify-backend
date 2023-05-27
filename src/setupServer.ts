@@ -10,10 +10,10 @@ import { Server } from 'socket.io';
 import { createClient } from 'redis';
 import { createAdapter } from '@socket.io/redis-adapter';
 import 'express-async-errors';
-import { config } from './config';
-import applicationRoutes from './routes';
-import { IErrorResponse, CustomError } from './shared/globals/helpers/error.handler';
 import Logger from 'bunyan';
+import { config } from '@root/config';
+import applicationRoutes from '@root/routes';
+import { CustomError, IErrorResponse } from '@global/helpers/error.handler';
 
 const SERVER_PORT = 5000;
 const log: Logger = config.createLogger('server');
@@ -108,5 +108,7 @@ export class ChatifyServer {
       log.info(`Server is running on port ${SERVER_PORT}`);
     });
   }
-  private socketIOConnections(io: Server): void {}
+  private socketIOConnections(io: Server): void {
+    log.info('Sockets');
+  }
 }

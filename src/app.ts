@@ -1,8 +1,8 @@
 import express, { Express } from 'express';
-import { config } from './config';
+import { config } from '@root/config';
 
-import { ChatifyServer } from './setupServer';
-import databaseConnection from './setupDatabase';
+import { ChatifyServer } from '@root/setupServer';
+import databaseConnection from '@root/setupDatabase';
 class Application {
   public initialize(): void {
     this.loadConfig();
