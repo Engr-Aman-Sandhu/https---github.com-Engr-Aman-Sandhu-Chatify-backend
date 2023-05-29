@@ -9,12 +9,14 @@
     "lint:fix": "for /R src %F in (*.ts) do eslint \"%F\" --fix",
     "prettier:check": "for /R src %F in (*.ts *.json) do prettier --check \"%F\"",
     "prettier:fix": "for /R src %F in (*.ts *.json) do prettier --write \"%F\"",
-    "build": "ttsc -p ."
+    "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@bull-board/express": "^5.2.0",
+    "@bull-board/ui": "^5.2.0",
     "@socket.io/redis-adapter": "^8.2.1",
     "bunyan": "^1.8.15",
     "compression": "^1.7.4",
@@ -33,6 +35,7 @@
     "typescript-transform-paths": "^3.4.6"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
     "@types/bunyan": "^1.8.8",
     "@types/compression": "^1.7.2",
     "@types/cookie-session": "^2.0.44",
@@ -45,6 +48,7 @@
     "eslint-config-prettier": "^8.8.0",
     "prettier": "^2.8.8",
     "ts-node": "^10.9.1",
+    "tsc-alias": "^1.8.6",
     "tsconfig-paths": "^4.2.0",
     "ttsc": "^0.3.1"
   }
