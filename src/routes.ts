@@ -1,12 +1,20 @@
 import { Application } from 'express';
-import Logger from 'bunyan';
-import { config } from '@root/config';
+import { authRoutes } from '@auth/routes/authRoutes';
+import { serverAdapter } from '@service/queues/base.queue';
+import { currentUserRoutes } from '@auth/routes/currentRoutes';
+import { authMiddleware } from '@global/helpers/auth-middleware';
 
-const log: Logger = config.createLogger('routes');
+// const log: Logger = config.createLogger('routes');
+
+const BASE_PATH = '/api/v1';
 
 export default (app: Application) => {
   const routes = () => {
-    log.info('Routes');
+    app.use('/queues', serverAdapter.getRouter());
+    app.use(BASE_PATH, authRoutes.routes());
+    app.use(BASE_PATH, authRoutes.signoutRoute());
+
+    app.use(BASE_PATH, authMiddleware.verifyUser, currentUserRoutes.routes());
   };
   routes();
 };
