@@ -9,6 +9,8 @@ import { IAuthDocument } from '@auth/interfaces/auth.interface';
 import { BadRequestError } from '@global/helpers/error-handler';
 import { userService } from '@service/db/user.service';
 import { IUserDocument } from '@user/interfaces/user.interface';
+import { forgotPasswordTemplate } from '@service/emails/templates/forgot-password/forgot-password-template';
+import { emailQueue } from '@service/queues/email.queue';
 
 export class SignIn {
   @joiValidation(loginSchema)
@@ -46,6 +48,10 @@ export class SignIn {
       uId: existingUser!.uId,
       createdAt: existingUser!.createdAt
     } as IUserDocument;
+
+    const resetlink = `${config.CLIENT_URL}/reset-password?token=1234`;
+    const template: string = forgotPasswordTemplate.passwordResetTemplate(existingUser.username, resetlink);
+    emailQueue.addEmailJob('forgotPasswordEmail', { template, receiverEmail: `${config.SENDER_EMAIL}`, subject: 'Reset your password' });
 
     res.status(HTTP_STATUS.OK).json({ message: 'User login successfully', user: userDocument, token: userJwt });
   }
