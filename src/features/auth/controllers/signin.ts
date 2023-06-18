@@ -11,6 +11,8 @@ import { userService } from '@service/db/user.service';
 import { IUserDocument } from '@user/interfaces/user.interface';
 import { forgotPasswordTemplate } from '@service/emails/templates/forgot-password/forgot-password-template';
 import { emailQueue } from '@service/queues/email.queue';
+import moment from 'moment';
+import publicIP from 'ip';
 
 export class SignIn {
   @joiValidation(loginSchema)
