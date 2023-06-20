@@ -9,7 +9,8 @@
     "lint:fix": "for /R src %F in (*.ts) do eslint \"%F\" --fix",
     "prettier:check": "for /R src %F in (*.ts *.json) do prettier --check \"%F\"",
     "prettier:fix": "for /R src %F in (*.ts *.json) do prettier --write \"%F\"",
-    "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json"
+    "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
+    "test": "jest --coverage=true -w=1 --forceExit --detectOpenHandles --watchAll=true"
   },
   "keywords": [],
   "author": "",
