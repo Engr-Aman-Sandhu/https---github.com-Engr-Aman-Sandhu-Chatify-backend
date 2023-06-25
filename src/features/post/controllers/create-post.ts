@@ -4,6 +4,9 @@ import { Request, Response } from 'express';
 import { ObjectId } from 'mongodb';
 import { joiValidation } from '@global/decorators/joi-validation.decorators';
 import { postSchema } from '@post/schemes/post.schemes';
+import { PostCache } from '@service/redis/post.cache';
+
+const postCache: PostCache = new PostCache();
 
 export class Create {
   @joiValidation(postSchema)
@@ -12,7 +15,7 @@ export class Create {
 
     const postObjectId: ObjectId = new ObjectId();
 
-    const createPost: IPostDocument = {
+    const createdPost: IPostDocument = {
       _id: postObjectId,
       userId: req.currentUser!.userId,
       username: req.currentUser!.username,
@@ -30,6 +33,12 @@ export class Create {
       createdAt: new Date(),
       reactions: { like: 0, love: 0, happy: 0, sad: 0, wow: 0, angry: 0 }
     } as IPostDocument;
+    await postCache.savePostToCache({
+      key: postObjectId,
+      currentUserId: `${req.currentUser!.userId}`,
+      uId: `${req.currentUser!.uId}`,
+      createdPost
+    });
 
     res.status(HTTP_STATUS.CREATED).json({ message: 'Psot Created successfully' });
   }
