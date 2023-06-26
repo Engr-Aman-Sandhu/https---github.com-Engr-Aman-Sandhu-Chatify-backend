@@ -1,0 +1,37 @@
+@baseUrl = http://localhost:5000
+
+@urlPath = api/v1
+
+
+###
+POST {{baseUrl}}/{{urlPath}}/post
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "post": "This is first post",
+  "bgColor": "#ffffff",
+  "privacy": "Public",
+  "gifUrl": "",
+  "profilePicture": "https://res.cloudinary.com/dmzxvwcco/image/upload/v1686785592/648a4e3d2664d7cb3cf80de3",
+  "feelings": ""
+
+}
+
+
+###
+POST {{baseUrl}}/{{urlPath}}/post/image/post
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "post": "Image Post",
+  "bgColor": "#ffffff",
+  "privacy": "Public",
+  "gifUrl": "",
+  "profilePicture": "https://res.cloudinary.com/dmzxvwcco/image/upload/v1686785592/648a4e3d2664d7cb3cf80de3",
+  "feelings": "",
+  "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0gAAAMyAQMAAABtkHM/AAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAAAFiS0dEAf8CLd4AAABrSURBVBgZ7cGBAAAAAMOg+1NP4AjVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjgBSwwABwrL8wAAAAABJRU5ErkJggg=="
+}

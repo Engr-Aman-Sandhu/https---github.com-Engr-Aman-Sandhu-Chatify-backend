@@ -89,12 +89,21 @@ export class UserCache extends BaseCache {
       }
       await this.client.ZADD('user', { score: parseInt(userUId, 10), value: `${key}` });
 
-      for (const [itemKey, value] of Object.entries(dataToSave)) {
-        await this.client.HSET(`users:${key}`, `${itemKey}`, `${value}`);
+      // Loop over the array of strings
+      for (let i = 0; i < dataToSave.length; i += 2) {
+        // Get the key from the odd position
+        const itemkey = dataToSave[i];
+        // Get the value from the even position
+        const value = dataToSave[i + 1];
+        await this.client.HSET(`users:${key}`, `${itemkey}`, `${value}`);
       }
+
+      // for (const [itemKey, value] of Object.entries(dataToSave)) {
+      //   await this.client.HSET(`users:${key}`, `${itemKey}`, `${value}`);
+      // }
     } catch (error) {
       log.error(error);
-      throw new ServerError('Server error.Try Again.');
+      throw new ServerError('Server error. Try again.');
     }
   }
 

@@ -79,12 +79,19 @@ export class PostCache extends BaseCache {
       }
 
       const postCount: string[] = await this.client.HMGET(`users:${currentUserId}`, 'postsCount');
-      const multi: ReturnType<typeof this.client.multi> = this.client.multi();
+      // const multi: ReturnType<typeof this.client.multi> = this.client.multi();
       await this.client.ZADD('post', { score: parseInt(uId, 10), value: `${key}` });
-      multi.HSET(`posts:${key}`, dataToSave);
+
+      for (let i = 0; i < dataToSave.length; i += 2) {
+        const itemkey = dataToSave[i];
+        const value = dataToSave[i + 1];
+        await this.client.HSET(`posts:${key}`, `${itemkey}`, `${value}`);
+      }
+
+      // multi.HSET(`posts:${key}`, dataToSave);
       const count: number = parseInt(postCount[0], 10) + 1;
-      multi.HSET(`users:${currentUserId}`, ['postsCount', count]);
-      multi.exec();
+      await this.client.HSET(`users:${currentUserId}`, ['postsCount', count]);
+      // multi.exec();
     } catch (error) {
       log.error(error);
       throw new ServerError('Server error. Try again.');
