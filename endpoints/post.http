@@ -51,3 +51,9 @@ Content-Type: application/json
 Accept: application/json
 withCredentials: true
 
+###
+DELETE {{baseUrl}}/{{urlPath}}/post/64997f6c332eebfbef127e66
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
