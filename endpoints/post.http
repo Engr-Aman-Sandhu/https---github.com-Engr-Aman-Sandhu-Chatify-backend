@@ -74,3 +74,23 @@ withCredentials: true
   "imgVersion" : ""
 
 }
+
+###
+PUT {{baseUrl}}/{{urlPath}}/post/image/649b380396ee41350bb44648
+Content-Type: application/json
+Accept: application/json
+withCredentials: true,
+
+{
+  "post": "post with image",
+  "bgColor": "red",
+  "privacy": "Public",
+  "gifUrl": "",
+  "profilePicture": "https://res.cloudinary.com/dyamr9ym3/image/upload/v1659189696/62e539c0d8b514f6e42e3b5b",
+  "feelings": "sad",
+  "imgId": "p8jktvsccwqp3ayja0iq",
+  "imgVersion": "1659462367",
+  "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0gAAAMyAQMAAABtkHM/AAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAAAFiS0dEAf8CLd4AAABrSURBVBgZ7cGBAAAAAMOg+1NP4AjVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjgBSwwABwrL8wAAAAABJRU5ErkJggg=="
+}
+
+
