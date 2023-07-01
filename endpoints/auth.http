@@ -9,9 +9,9 @@ Accept: application/json
 withCredentials: true
 
 {
-  "username": "manny1",
-  "password": "qwerty",
-  "email": "manny1@test.com",
+  "username": "Aman1",
+  "password": "Aman1",
+  "email": "Aman1@test.com",
   "avatarColor": "blue",
   "avatarImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0gAAAMyAQMAAABtkHM/AAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAAAFiS0dEAf8CLd4AAABrSURBVBgZ7cGBAAAAAMOg+1NP4AjVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjgBSwwABwrL8wAAAAABJRU5ErkJggg=="
 }
@@ -23,8 +23,8 @@ Accept: application/json
 withCredentials: true
 
 {
-  "username": "manny1",
-  "password": "qwerty1"
+  "username": "Aman1",
+  "password": "Aman1"
 }
 
 
@@ -48,7 +48,7 @@ Accept: application/json
 withCredentials: true
 
 {
-  "email": "manny1@test.com"
+  "email": "Aman1@test.com"
 }
 
 ###
@@ -58,6 +58,6 @@ Accept: application/json
 withCredentials: true
 
 {
-  "password": "qwerty1",
-  "confirmPassword": "qwerty1"
+  "password": "Aman1",
+  "confirmPassword": "Aman1"
 }
