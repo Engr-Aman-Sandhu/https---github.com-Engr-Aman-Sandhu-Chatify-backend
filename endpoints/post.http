@@ -57,3 +57,20 @@ Content-Type: application/json
 Accept: application/json
 withCredentials: true
 
+###
+PUT {{baseUrl}}/{{urlPath}}/post/649998b8615c6a972b198d28
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+ "post": "This is the updated post.",
+  "bgColor": "#555555",
+  "privacy": "Public",
+  "gifUrl": "",
+  "profilePicture": "https://res.cloudinary.com/dmzxvwcco/image/upload/v1686785592/648a4e3d2664d7cb3cf80de3",
+  "feelings": "",
+  "imgId" : "vtcq4mqbnmlegvugrgd2",
+  "imgVersion" : ""
+
+}

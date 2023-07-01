@@ -35,53 +35,29 @@ export class UserCache extends BaseCache {
       bgImageVersion,
       social
     } = createdUser;
-    const firstList: string[] = [
-      '_id',
-      `${_id}`,
-      'uId',
-      `${uId}`,
-      'username',
-      `${username}`,
-      'email',
-      `${email}`,
-      'avatarColor',
-      `${avatarColor}`,
-      'createdAt',
-      `${createdAt}`,
-      'postsCount',
-      `${postsCount}`
-    ];
-    const secondList: string[] = [
-      'blocked',
-      JSON.stringify(blocked),
-      'blockedBy',
-      JSON.stringify(blockedBy),
-      'profilePicture',
-      `${profilePicture}`,
-      'followersCount',
-      `${followersCount}`,
-      'followingCount',
-      `${followingCount}`,
-      'notifications',
-      JSON.stringify(notifications),
-      'social',
-      JSON.stringify(social)
-    ];
-    const thirdList: string[] = [
-      'work',
-      `${work}`,
-      'location',
-      `${location}`,
-      'school',
-      `${school}`,
-      'quote',
-      `${quote}`,
-      'bgImageVersion',
-      `${bgImageVersion}`,
-      'bgImageId',
-      `${bgImageId}`
-    ];
-    const dataToSave: string[] = [...firstList, ...secondList, ...thirdList];
+
+    const dataToSave = {
+      _id: `${_id}`,
+      uId: `${uId}`,
+      username: `${username}`,
+      email: `${email}`,
+      avatarColor: `${avatarColor}`,
+      createdAt: `${createdAt}`,
+      postsCount: `${postsCount}`,
+      blocked: JSON.stringify(blocked),
+      blockedBy: JSON.stringify(blockedBy),
+      profilePicture: `${profilePicture}`,
+      followersCount: `${followersCount}`,
+      followingCount: `${followingCount}`,
+      notifications: JSON.stringify(notifications),
+      social: JSON.stringify(social),
+      work: `${work}`,
+      location: `${location}`,
+      school: `${school}`,
+      quote: `${quote}`,
+      bgImageVersion: `${bgImageVersion}`,
+      bgImageId: `${bgImageId}`
+    };
 
     try {
       if (!this.client.isOpen) {
@@ -89,18 +65,9 @@ export class UserCache extends BaseCache {
       }
       await this.client.ZADD('user', { score: parseInt(userUId, 10), value: `${key}` });
 
-      // Loop over the array of strings
-      for (let i = 0; i < dataToSave.length; i += 2) {
-        // Get the key from the odd position
-        const itemkey = dataToSave[i];
-        // Get the value from the even position
-        const value = dataToSave[i + 1];
-        await this.client.HSET(`users:${key}`, `${itemkey}`, `${value}`);
+      for (const [itemKey, itemValue] of Object.entries(dataToSave)) {
+        await this.client.HSET(`posts:${key}`, `${itemKey}`, `${itemValue}`);
       }
-
-      // for (const [itemKey, value] of Object.entries(dataToSave)) {
-      //   await this.client.HSET(`users:${key}`, `${itemKey}`, `${value}`);
-      // }
     } catch (error) {
       log.error(error);
       throw new ServerError('Server error. Try again.');
