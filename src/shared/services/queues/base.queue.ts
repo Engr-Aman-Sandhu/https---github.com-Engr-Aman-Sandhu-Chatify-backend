@@ -7,8 +7,9 @@ import { config } from '@root/config';
 import { IAuthJob } from '@auth/interfaces/auth.interface';
 import { IEmailJob } from '@user/interfaces/user.interface';
 import { IPostJobData } from '@post/interfaces/post.interface';
+import { IReactionJob } from '@reaction/interfaces/reaction.interface';
 
-type IBaseJobData = IAuthJob | IEmailJob | IPostJobData;
+type IBaseJobData = IAuthJob | IEmailJob | IPostJobData | IReactionJob;
 
 let bullAdapters: BullAdapter[] = [];
 export let serverAdapter: ExpressAdapter;
@@ -20,7 +21,7 @@ export abstract class BaseQueue {
   constructor(queueName: string) {
     this.queue = new Queue(queueName, `${config.REDIS_HOST}`);
     bullAdapters.push(new BullAdapter(this.queue));
-    bullAdapters = [...new Set(bullAdapters)]; //To Eliminate Dublicate queues.
+    bullAdapters = [...new Set(bullAdapters)];
     serverAdapter = new ExpressAdapter();
     serverAdapter.setBasePath('/queues');
 
@@ -36,11 +37,11 @@ export abstract class BaseQueue {
     });
 
     this.queue.on('global:completed', (jobId: string) => {
-      this.log.info(`Job ${jobId} Completed.`);
+      this.log.info(`Job ${jobId} completed`);
     });
 
     this.queue.on('global:stalled', (jobId: string) => {
-      this.log.info(`job ${jobId} is stalled`);
+      this.log.info(`Job ${jobId} is stalled`);
     });
   }
 

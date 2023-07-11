@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
 import { authMiddleware } from '@global/helpers/auth-middleware';
 import { Add } from '@reaction/controllers/add-reactions';
-// import { Remove } from '@reaction/controllers/remove-reaction';
+import { Remove } from '@reaction/controllers/remove-reaction';
 // import { Get } from '@reaction/controllers/get-reactions';
 
 class ReactionRoutes {
@@ -22,11 +22,11 @@ class ReactionRoutes {
 
     this.router.post('/post/reaction', authMiddleware.checkAuthentication, Add.prototype.reaction);
 
-    // this.router.delete(
-    //   '/post/reaction/:postId/:previousReaction/:postReactions',
-    //   authMiddleware.checkAuthentication,
-    //   Remove.prototype.reaction
-    // );
+    this.router.delete(
+      '/post/reaction/:postId/:previousReaction/:postReactions',
+      authMiddleware.checkAuthentication,
+      Remove.prototype.reaction
+    );
 
     return this.router;
   }
