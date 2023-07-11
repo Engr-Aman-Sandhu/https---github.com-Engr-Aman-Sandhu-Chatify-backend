@@ -31,12 +31,13 @@ export class ReactionCache extends BaseCache {
 
       if (type) {
         await this.client.LPUSH(`reactions:${key}`, JSON.stringify(reaction));
-        const dataToSave: string[] = ['reactions', JSON.stringify(postReactions)];
+        // const dataToSave: string[] = ['reactions', JSON.stringify(postReactions)];
 
         // for (const [itemKey, itemValue] of Object.entries(dataToSave)) {
         //   await this.client.HSET(`posts:${key}`, `${itemKey}`, `${itemValue}`);
         // }
-        await this.client.HSET(`posts:${key}`, dataToSave);
+
+        await this.client.HSET(`posts:${key}`, 'reactions', JSON.stringify(postReactions));
       }
     } catch (error) {
       log.error(error);
@@ -55,12 +56,14 @@ export class ReactionCache extends BaseCache {
       multi.LREM(`reactions:${key}`, 1, JSON.stringify(userPreviousReaction));
       await multi.exec();
 
-      const dataToSave: string[] = ['reactions', JSON.stringify(postReactions)];
+      // const dataToSave: string[] = ['reactions', JSON.stringify(postReactions)];
 
       // for (const [itemKey, itemValue] of Object.entries(dataToSave)) {
       //   await this.client.HSET(`posts:${key}`, `${itemKey}`, `${itemValue}`);
       // }
-      await this.client.HSET(`posts:${key}`, dataToSave);
+      // await this.client.HSET(`posts:${key}`, dataToSave);
+
+      await this.client.HSET(`posts:${key}`, 'reactions', JSON.stringify(postReactions));
     } catch (error) {
       log.error(error);
       throw new ServerError('Server error. Try again.');
