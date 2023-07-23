@@ -66,8 +66,9 @@ export class UserCache extends BaseCache {
       await this.client.ZADD('user', { score: parseInt(userUId, 10), value: `${key}` });
 
       for (const [itemKey, itemValue] of Object.entries(dataToSave)) {
-        await this.client.HSET(`posts:${key}`, `${itemKey}`, `${itemValue}`);
+        await this.client.HSET(`users:${key}`, `${itemKey}`, `${itemValue}`);
       }
+      console.log('Data to be saved to Redis:', dataToSave);
     } catch (error) {
       log.error(error);
       throw new ServerError('Server error. Try again.');

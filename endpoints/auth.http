@@ -12,7 +12,7 @@ withCredentials: true
   "username": "Aman3",
   "password": "Aman3",
   "email": "Aman3@test.com",
-  "avatarColor": "red",
+  "avatarColor": "black",
   "avatarImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0gAAAMyAQMAAABtkHM/AAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAAAFiS0dEAf8CLd4AAABrSURBVBgZ7cGBAAAAAMOg+1NP4AjVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjgBSwwABwrL8wAAAAABJRU5ErkJggg=="
 }
 
@@ -23,8 +23,8 @@ Accept: application/json
 withCredentials: true
 
 {
-  "username": "Aman3",
-  "password": "Aman3"
+  "username": "Aman1",
+  "password": "Aman1"
 }
 
 
