@@ -10,12 +10,12 @@ Accept: application/json
 withCredentials: true
 
 {
-  "post": "This is first post",
-  "bgColor": "#ffffff",
+  "post": "This is first post of Aman",
+  "bgColor": "#00ffff",
   "privacy": "Public",
   "gifUrl": "",
   "profilePicture": "https://res.cloudinary.com/dmzxvwcco/image/upload/v1686785592/648a4e3d2664d7cb3cf80de3",
-  "feelings": ""
+  "feelings": "happy"
 
 }
 
