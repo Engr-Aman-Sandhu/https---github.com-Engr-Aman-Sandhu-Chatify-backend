@@ -13,6 +13,8 @@ import { emailQueue } from '@service/queues/email.queue';
 import { UserCache } from '@service/redis/user.cache';
 import { map } from 'lodash';
 
+const userCache: UserCache = new UserCache();
+
 class FollowerService {
   public async addFollowerToDB(userId: string, followeeId: string, username: string, followerDocumentId: ObjectId): Promise<void> {
     const followeeObjectId: ObjectId = new mongoose.Types.ObjectId(followeeId);
@@ -39,7 +41,7 @@ class FollowerService {
       }
     ]);
 
-    const response: [BulkWriteResult, IUserDocument | null] = await Promise.all([users, UserModel.findOne({ id: followeeId })]);
+    const response: [BulkWriteResult, IUserDocument | null] = await Promise.all([users, userCache.getUserFromCache(followeeId)]);
 
     if (response[1]?.notifications.follows && userId !== followeeId) {
       const notificationModel: INotificationDocument = new NotificationModel();
