@@ -40,3 +40,9 @@ withCredentials: true
   "userOne": "64bd25fd7e4a9eb9bf11b844",
   "userTwo": "64bd262d7e4a9eb9bf11b84b"
 }
+
+###
+GET {{baseUrl}}/{{urlPath}}/chat/message/conversation-list
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
