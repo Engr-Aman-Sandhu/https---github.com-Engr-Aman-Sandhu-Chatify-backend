@@ -9,6 +9,7 @@ import { commentRoutes } from '@comment/routes/commentRoutes';
 import { followerRoutes } from '@follower/routes/followerRoutes';
 import { notificationRoutes } from '@notification/routes/notificationRoutes';
 import { imageRoutes } from '@image/routes/imageRoutes';
+import { chatRoutes } from '@chat/routes/chatRoutes';
 
 // const log: Logger = config.createLogger('routes');
 
@@ -32,6 +33,8 @@ export default (app: Application) => {
     app.use(BASE_PATH, authMiddleware.verifyUser, notificationRoutes.routes());
 
     app.use(BASE_PATH, authMiddleware.verifyUser, imageRoutes.routes());
+
+    app.use(BASE_PATH, authMiddleware.verifyUser, chatRoutes.routes());
   };
   routes();
 };
