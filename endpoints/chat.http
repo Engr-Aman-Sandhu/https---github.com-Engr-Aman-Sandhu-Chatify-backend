@@ -8,12 +8,12 @@ Accept: application/json
 withCredentials: true
 
 {
-  "conversationId": "",
+  "conversationId": "65005c3a5963336ea3e3194c",
   "receiverId": "64bd262d7e4a9eb9bf11b84b",
   "receiverUsername": "Aman1",
   "receiverAvatarColor": "black",
   "receiverProfilePicture": "https://res.cloudinary.com/dyamr9ym3/image/upload/v1690117643/64bd262d7e4a9eb9bf11b84b",
-  "body": "Have a nice day.",
+  "body": "2nd Message",
   "gifUrl": "",
   "isRead": false,
   "selectedImage": ""
@@ -59,3 +59,14 @@ DELETE {{baseUrl}}/{{urlPath}}/chat/message/mark-as-deleted/64e79ec72a4127a6a64a
 Content-Type: application/json
 Accept: application/json
 withCredentials: true
+
+###
+PUT {{baseUrl}}/{{urlPath}}/chat/message/mark-as-read
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "senderId": "64bd25fd7e4a9eb9bf11b844",
+  "receiverId": "64bd262d7e4a9eb9bf11b84b"
+}

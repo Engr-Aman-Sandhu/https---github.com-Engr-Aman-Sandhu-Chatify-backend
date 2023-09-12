@@ -10,11 +10,10 @@ import { UploadApiResponse } from 'cloudinary';
 import { uploads } from '@global/helpers/cloudinary-upload';
 import { BadRequestError } from '@global/helpers/error-handler';
 import { IMessageData, IMessageNotification } from '@chat/interfaces/chat.interface';
-
+import { socketIOChatObject } from '@socket/chat';
 import { INotificationTemplate } from '@notification/interfaces/notification.interface';
 import { notificationTemplate } from '@service/emails/templates/notifications/notification-template';
 import { emailQueue } from '@service/queues/email.queue';
-import { socketIOChatObject } from '@socket/chat';
 import { MessageCache } from '@service/redis/message.cache';
 import { chatQueue } from '@service/queues/chat.queue';
 
@@ -46,7 +45,7 @@ export class Add {
       if (!result?.public_id) {
         throw new BadRequestError(result.message);
       }
-      fileUrl = `https://res.cloudinary.com/dmzxvwcco/image/upload/v${result.version}/${result.public_id}`;
+      fileUrl = `https://res.cloudinary.com/dyamr9ym3/image/upload/v${result.version}/${result.public_id}`;
     }
 
     const messageData: IMessageData = {
@@ -80,6 +79,7 @@ export class Add {
         messageData
       });
     }
+
     await messageCache.addChatListToCache(`${req.currentUser!.userId}`, `${receiverId}`, `${conversationObjectId}`);
     await messageCache.addChatListToCache(`${receiverId}`, `${req.currentUser!.userId}`, `${conversationObjectId}`);
     await messageCache.addChatMessageToCache(`${conversationObjectId}`, messageData);
