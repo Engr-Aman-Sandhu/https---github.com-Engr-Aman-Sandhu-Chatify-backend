@@ -69,15 +69,15 @@ export class Get {
   }
 
   private async allUsers({ newSkip, limit, skip, userId }: IUserAll): Promise<IAllUsers> {
-    let users;
+    let users = null;
     let type = '';
     const cachedUsers: IUserDocument[] = (await userCache.getUsersFromCache(newSkip, limit, userId)) as IUserDocument[];
-    if (cachedUsers.length) {
+    if (!cachedUsers.length) {
       type = 'redis';
       users = cachedUsers;
     } else {
-      type = 'mongodb';
-      users = await userService.getAllUsers(userId, skip, limit);
+    type = 'mongodb';
+    users = await userService.getAllUsers(userId, skip, limit);
     }
     const totalUsers: number = await Get.prototype.usersCount(type);
     return { users, totalUsers };
