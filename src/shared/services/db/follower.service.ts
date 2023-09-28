@@ -167,6 +167,19 @@ class FollowerService {
     ]);
     return follower;
   }
+
+  public async getFolloweesIds(userId: string): Promise<string[]> {
+    const followee = await FollowerModel.aggregate([
+      { $match: { followerId: new mongoose.Types.ObjectId(userId) } },
+      {
+        $project: {
+          followeeId: 1,
+          _id: 0
+        }
+      }
+    ]);
+    return map(followee, (result) => result.followeeId.toString());
+  }
 }
 
 export const followerService: FollowerService = new FollowerService();
