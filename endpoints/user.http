@@ -6,3 +6,26 @@ GET {{baseUrl}}/{{urlPath}}/user/all/1
 Content-Type: application/json
 Accept: application/json
 withCredentials: true
+
+GET {{baseUrl}}/{{urlPath}}/user/profile
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+###
+GET {{baseUrl}}/{{urlPath}}/user/profile/62f29f71da585226216b2724
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+###
+GET {{baseUrl}}/{{urlPath}}/user/profile/posts/Aman1/62f2962c6b761b208a728e91/643053551256
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+###
+GET {{baseUrl}}/{{urlPath}}/user/profile/user/suggestions
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
