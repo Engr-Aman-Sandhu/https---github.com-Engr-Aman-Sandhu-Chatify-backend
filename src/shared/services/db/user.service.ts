@@ -14,6 +14,33 @@ class UserService {
     await AuthModel.updateOne({ username }, { $set: { password: hashedPassword } }).exec();
   }
 
+  public async updateUserInfo(userId: string, info: IBasicInfo): Promise<void> {
+    await UserModel.updateOne(
+      { _id: userId },
+      {
+        $set: {
+          work: info['work'],
+          school: info['school'],
+          quote: info['quote'],
+          location: info['location']
+        }
+      }
+    ).exec();
+  }
+
+  public async updateSocialLinks(userId: string, links: ISocialLinks): Promise<void> {
+    await UserModel.updateOne(
+      { _id: userId },
+      {
+        $set: { social: links }
+      }
+    ).exec();
+  }
+
+  public async updateNotificationSettings(userId: string, settings: INotificationSettings): Promise<void> {
+    await UserModel.updateOne({ _id: userId }, { $set: { notifications: settings } }).exec();
+  }
+
   public async getUserById(userId: string): Promise<IUserDocument> {
     const users: IUserDocument[] = await UserModel.aggregate([
       { $match: { _id: new mongoose.Types.ObjectId(userId) } },
