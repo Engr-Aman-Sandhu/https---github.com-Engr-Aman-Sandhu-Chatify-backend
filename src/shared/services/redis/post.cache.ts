@@ -162,10 +162,14 @@ export class PostCache extends BaseCache {
         await this.client.connect();
       }
 
-      const reply: string[] = await this.client.ZRANGE(key, start, end, { REV: true });
+      // const reply: string[] = await this.client.ZRANGE(key, start, end, { REV: true });
+      const reply: string[] = await this.client.ZRANGE(key, start, end);
       const multi: ReturnType<typeof this.client.multi> = this.client.multi();
-      for (const value of reply) {
-        multi.HGETALL(`posts:${value}`);
+      // for (const value of reply) {
+      //   multi.HGETALL(`posts:${value}`);
+      // }
+      for (let i = reply.length - 1; i >= 0; i--) {
+        multi.HGETALL(`posts:${reply[i]}`);
       }
       const replies: PostCacheMultiType = (await multi.exec()) as PostCacheMultiType;
       const postWithVideos: IPostDocument[] = [];

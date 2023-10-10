@@ -84,7 +84,7 @@ export class Get {
     let users = null;
     let type = '';
     const cachedUsers: IUserDocument[] = (await userCache.getUsersFromCache(newSkip, limit, userId)) as IUserDocument[];
-    if (!cachedUsers.length) {
+    if (cachedUsers.length) {
       type = 'redis';
       users = cachedUsers;
     } else {
