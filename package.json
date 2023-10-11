@@ -10,7 +10,9 @@
     "prettier:check": "for /R src %F in (*.ts *.json) do prettier --check \"%F\"",
     "prettier:fix": "for /R src %F in (*.ts *.json) do prettier --write \"%F\"",
     "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
-    "test": "jest --coverage=true -w=1 --forceExit --detectOpenHandles --watchAll=true"
+    "test": "jest --coverage=true -w=1 --forceExit --detectOpenHandles --watchAll=true",
+    "seeds:dev": "npx ts-node src/seeds.ts",
+    "seeds:prod": "npx ts-node ./build/src/seeds.js"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +28,7 @@
     "bcryptjs": "^2.4.3",
     "bull": "^4.10.4",
     "bunyan": "^1.8.15",
+    "canvas": "^2.11.2",
     "cloudinary": "^1.37.0",
     "compression": "^1.7.4",
     "cookie-session": "^2.0.0",
