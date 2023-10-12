@@ -12,6 +12,7 @@ import { createAdapter } from '@socket.io/redis-adapter';
 import 'express-async-errors';
 import Logger from 'bunyan';
 import { config } from '@root/config';
+import apiStats from 'swagger-stats';
 import applicationRoutes from '@root/routes';
 import { CustomError, IErrorResponse } from '@global/helpers/error-handler';
 import { SocketIOPostHandler } from '@socket/post';
@@ -35,6 +36,7 @@ export class ChatifyServer {
     this.securityMiddleware(this.app);
     this.standardMiddleware(this.app);
     this.routesMiddleware(this.app);
+    this.apiMonitoring(this.app);
     this.globalErrorHandler(this.app);
     this.startServer(this.app);
   }
@@ -67,6 +69,14 @@ export class ChatifyServer {
 
   private routesMiddleware(app: Application): void {
     applicationRoutes(app);
+  }
+
+  private apiMonitoring(app: Application): void {
+    app.use(
+      apiStats.getMiddleware({
+        uriPath: '/api-monitoring'
+      })
+    );
   }
 
   private globalErrorHandler(app: Application): void {
