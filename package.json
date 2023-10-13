@@ -23,7 +23,6 @@
   "dependencies": {
     "@bull-board/express": "^5.2.1",
     "@bull-board/ui": "^5.2.1",
-    "@hapi/hapi": "^21.3.2",
     "@jest/types": "^29.5.0",
     "@sendgrid/mail": "^7.7.0",
     "@socket.io/redis-adapter": "^8.2.1",
