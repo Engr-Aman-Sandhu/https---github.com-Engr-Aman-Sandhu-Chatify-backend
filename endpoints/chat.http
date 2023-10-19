@@ -1,0 +1,85 @@
+@baseUrl = http://localhost:5000
+@urlPath = api/v1
+
+###
+POST {{baseUrl}}/{{urlPath}}/chat/message
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "conversationId": "65005c3a5963336ea3e3194c",
+  "receiverId": "64bd262d7e4a9eb9bf11b84b",
+  "receiverUsername": "Aman1",
+  "receiverAvatarColor": "black",
+  "receiverProfilePicture": "https://res.cloudinary.com/dyamr9ym3/image/upload/v1690117643/64bd262d7e4a9eb9bf11b84b",
+  "body": "2nd Message",
+  "gifUrl": "",
+  "isRead": false,
+  "selectedImage": ""
+}
+
+###
+POST {{baseUrl}}/{{urlPath}}/chat/message/add-chat-users
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "userOne": "64bd25fd7e4a9eb9bf11b844",
+  "userTwo": "64bd262d7e4a9eb9bf11b84b"
+}
+
+###
+POST {{baseUrl}}/{{urlPath}}/chat/message/remove-chat-users
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "userOne": "64bd25fd7e4a9eb9bf11b844",
+  "userTwo": "64bd262d7e4a9eb9bf11b84b"
+}
+
+###
+GET {{baseUrl}}/{{urlPath}}/chat/message/conversation-list
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+###
+GET {{baseUrl}}/{{urlPath}}/chat/message/user/64bd262d7e4a9eb9bf11b84b
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+
+###
+DELETE {{baseUrl}}/{{urlPath}}/chat/message/mark-as-deleted/64e79ec72a4127a6a64af4ef/64bd25fd7e4a9eb9bf11b844/64bd262d7e4a9eb9bf11b84b/deleteForEveryone
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+###
+PUT {{baseUrl}}/{{urlPath}}/chat/message/mark-as-read
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "senderId": "64bd25fd7e4a9eb9bf11b844",
+  "receiverId": "64bd262d7e4a9eb9bf11b84b"
+}
+
+###
+PUT {{baseUrl}}/{{urlPath}}/chat/message/reaction
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "conversationId": "65005c3a5963336ea3e3194c",
+  "messageId": "65005c3a5963336ea3e3194b",
+  "reaction": "like",
+  "type": "add"
+}
