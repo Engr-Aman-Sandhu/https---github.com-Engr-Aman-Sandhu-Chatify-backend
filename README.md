@@ -66,8 +66,8 @@ You'll need to copy the contents of `.env.development.example`, add to `.env` fi
 - There are three different branches develop, staging and main. The develop branch is the default branch.
 
 ```bash
-git clone -b develop https://github.com/uzochukwueddie/chatty-backend.git
-cd chatty-backend
+git clone -b develop https://github.com/engr-Aman-ur-Rehman/Chatify-backend.git
+cd chatify-backend
 npm install
 ```
 - To start the server after installation, run
